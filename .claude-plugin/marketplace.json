@@ -1,0 +1,14 @@
+{
+  "name": "pahferreira",
+  "description": "Pah Ferreira's agent skills as a Claude Code Plugin.",
+  "owner": {
+    "name": "Pah Ferreira"
+  },
+  "plugins": [
+    {
+      "name": "pahferreira-skills",
+      "source": "./",
+      "description": "Pah Ferreira's engineering agent skills."
+    }
+  ]
+}

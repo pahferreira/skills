@@ -1,5 +1,11 @@
 {
   "name": "pahferreira-skills",
-  "version": "0.0.1",
-  "description": "Pah Ferreira's agent skills for day to day engineering work."
+  "version": "1.0.0",
+  "description": "Pah Ferreira's agent skills for day to day engineering work.",
+  "author": {
+    "name": "Pah Ferreira"
+  },
+  "skills": [
+    "./skills/engineering/pr"
+  ]
 }
