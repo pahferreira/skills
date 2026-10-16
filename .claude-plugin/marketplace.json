@@ -6,7 +6,7 @@
   },
   "plugins": [
     {
-      "name": "pahferreira-engineering-skills",
+      "name": "pahferreira-skills",
       "source": "./",
       "description": "Pah Ferreira's engineering agent skills."
     }
