@@ -1,0 +1,22 @@
+{
+  "name": "pahferreira-skills",
+  "version": "1.0.0",
+  "description": "Pah Ferreira Engineering skills",
+  "homepage": "https://github.com/pahferreira/skills#readme",
+  "bugs": {
+    "url": "https://github.com/pahferreira/skills/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pahferreira/skills.git"
+  },
+  "license": "ISC",
+  "author": "pahferreira",
+  "scripts": {
+    "changeset": "changeset"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^1.0.1",
+    "@changesets/cli": "^3.0.3"
+  }
+}
