@@ -4,5 +4,8 @@
   "description": "Pah Ferreira's agent skills for day to day engineering work.",
   "author": {
     "name": "Pah Ferreira"
-  }
+  },
+  "skills": [
+    "./skills/engineering/pr"
+  ]
 }
