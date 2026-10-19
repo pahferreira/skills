@@ -2,7 +2,6 @@
 name: pr
 description: Open a pull request (GitHub) or merge request (GitLab) for the finished implementation, filled from the repo's template.
 argument-hint: "[base-branch]"
-disable-model-invocation: true
 ---
 
 Open a pull request for the work on the current branch. On GitLab it is a merge request; "PR" below means either.
