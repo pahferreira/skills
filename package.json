@@ -12,6 +12,11 @@
   },
   "license": "ISC",
   "author": "pahferreira",
+  "files": [
+    ".claude-plugin",
+    "skills",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "changeset": "changeset",
     "version-packages": "changeset version && node scripts/sync-plugin-version.mjs"

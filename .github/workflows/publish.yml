@@ -1,0 +1,60 @@
+name: Publish
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    # Only when a release PR (opened by release-pr.yml) is merged, or a manual run from main.
+    if: >-
+      (github.event_name == 'pull_request'
+        && github.event.pull_request.merged
+        && startsWith(github.event.pull_request.head.ref, 'changeset-release/'))
+      || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # npm trusted publishing (OIDC) and provenance
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha || github.sha }}
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+          registry-url: https://registry.npmjs.org
+
+      - name: Check if version is already published
+        id: check
+        run: |
+          name=$(jq -r .name package.json)
+          version=$(jq -r .version package.json)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if npm view "$name@$version" version >/dev/null 2>&1; then
+            echo "::notice::$name@$version is already on npm, skipping."
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish to npm
+        if: steps.check.outputs.published == 'false'
+        run: npm publish --access public
+
+      - name: Summary
+        if: steps.check.outputs.published == 'false'
+        run: echo "Published ${{ github.event.repository.name }} v${{ steps.check.outputs.version }} to npm" >> "$GITHUB_STEP_SUMMARY"
