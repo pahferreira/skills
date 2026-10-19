@@ -13,7 +13,8 @@
   "license": "ISC",
   "author": "pahferreira",
   "scripts": {
-    "changeset": "changeset"
+    "changeset": "changeset",
+    "version-packages": "changeset version && node scripts/sync-plugin-version.mjs"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",
