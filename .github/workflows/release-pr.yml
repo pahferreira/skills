@@ -1,0 +1,68 @@
+name: Release PR
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  release-pr:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check for pending changesets
+        id: select-mode
+        uses: changesets/action/select-mode@v2
+
+      - name: Nothing to release
+        if: steps.select-mode.outputs.mode != 'version'
+        run: echo "::notice::No pending changesets on main, so no release PR was opened."
+
+      - name: Compute next version
+        if: steps.select-mode.outputs.mode == 'version'
+        id: next
+        run: |
+          npx changeset status --output=release.json
+          version=$(jq -r '.releases[] | select(.name == "pahferreira-skills") | .newVersion' release.json)
+          rm release.json
+          if [ -z "$version" ]; then
+            echo "::error::No pending release for pahferreira-skills."
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Open or update release PR
+        if: steps.select-mode.outputs.mode == 'version'
+        id: version
+        uses: changesets/action/version@v2
+        with:
+          script: npm run version-packages -- ${{ steps.next.outputs.version }}
+          pr-base-branch: main
+          pr-title: "chore(release): v${{ steps.next.outputs.version }}"
+          commit-message: "chore(release): v${{ steps.next.outputs.version }}"
+
+      - name: Summary
+        if: steps.version.outputs.pr-number
+        run: |
+          echo "Release PR for v${{ steps.next.outputs.version }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ steps.version.outputs.pr-number }}" >> "$GITHUB_STEP_SUMMARY"

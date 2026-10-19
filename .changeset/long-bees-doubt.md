@@ -1,5 +1,5 @@
 ---
-"pahferreira-skills": major
+"pahferreira-skills": minor
 ---
 
 Version control setup with changesets
