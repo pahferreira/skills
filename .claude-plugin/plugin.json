@@ -6,6 +6,7 @@
     "name": "Pah Ferreira"
   },
   "skills": [
-    "./skills/engineering/pr"
+    "./skills/engineering/pr",
+    "./skills/engineering/bug-hunt"
   ]
 }
