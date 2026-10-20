@@ -21,9 +21,15 @@ Done when every field is filled or marked `unknown`. Hunters treat `unknown` as 
 
 ## 2. Map the surface
 
-Find the codebase's **layers** from the environment: workspaces (`package.json`, `go.work`, …), top-level app directories, the project `CLAUDE.md`. Start where the symptom shows (a screen, a response, a log line, a job) and trace one hop in each direction to see which layers it crosses.
+Build the **surface map** every hunter will start from:
 
-Done when every layer is listed with its path and marked implicated or cleared, with a one-line reason for each.
+- **Layers**: find them from the environment: workspaces (`package.json`, `go.work`, …), top-level app directories, the project `CLAUDE.md`.
+- **Symptom location**: find where the symptom shows (a screen, a response, a log line, a job) as `file:line`, and trace one hop in each direction to see which layers it crosses.
+- **Obvious checks**: run them once, here, for every hunter: right branch and build, env vars present, dependencies installed, migrations applied.
+
+When the map already pins the cause (a stack trace names the line, an obvious check fails), show it to the user and offer to skip the hunt. Continue only on their go-ahead.
+
+Done when every layer is listed with its path and marked implicated or cleared with a one-line reason, the symptom is located or marked `unknown`, and every obvious check has a result.
 
 ## 3. Pick the hunters
 
@@ -45,6 +51,7 @@ Launch every hunter in one message as parallel `general-purpose` agents with `mo
 
 - first line: "Read `<absolute path to this skill's hunter.md>` and follow it."
 - the bug brief, verbatim
+- the surface map, verbatim
 - its slice: lens and scope paths
 - the other hunters' slices, so it leaves those alone
 
