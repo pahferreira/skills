@@ -1,6 +1,6 @@
 ---
 name: bug-hunt
-description: Hunt a bug with 2–3 parallel Anbu investigators, then align with the user on ranked root-cause hypotheses.
+description: Hunt a bug with 2–4 parallel Anbu investigators, then align with the user on ranked root-cause hypotheses.
 argument-hint: "<bug description | issue #/URL | ticket ref>"
 disable-model-invocation: true
 ---
@@ -32,7 +32,8 @@ Each hunter owns a **slice**: a lens plus a scope that no other hunter covers. A
 1. One **trace** hunter per implicated layer, at most two.
 2. Add a **history** hunter when the bug is a regression or its onset is `unknown`.
 3. Add a **boundary** hunter when two layers are implicated.
-4. Clamp to 2–3. Below 2: add history. Above 3: drop boundary. High impact (production, data loss, many users): fill up to 3.
+4. Normal impact: clamp to 2–3. Below 2: add history. Above 3: drop boundary.
+5. High impact (production, data loss, many users): run up to 4. Add history and boundary when missing, and give a second layer a trace even if step 2 cleared it, since a wrong clearance costs most here.
 
 [`hunter.md`](hunter.md) defines each lens.
 
