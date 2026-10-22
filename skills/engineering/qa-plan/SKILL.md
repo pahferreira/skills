@@ -2,6 +2,7 @@
 name: qa-plan
 description: Write a QA plan for the current branch from its diff and its issue, then file it where the repo keeps QA plans (Notion, another connected tool, or `.qa-plans/`).
 argument-hint: "[issue] [base-branch]"
+disable-model-invocation: true
 ---
 
 Write a manual QA plan for the work on the current branch: what changed, and a checklist a tester can run in the app.
@@ -28,7 +29,7 @@ Done when you can name every **user-visible change** in the diff (page, button, 
 
 Fill [`plan-template.md`](./plan-template.md). Its sections and their order are fixed.
 
-Each **check** under *What to test* is one checkbox: an action a tester takes, and the outcome they should see. Quote the UI's own copy (labels, toasts, error messages) exactly as the code renders it, in the product's language. Group checks by area under `###` headings, such as the feature's main flow, validation, destructive actions, side effects on other screens, and permissions.
+Each **check** under _What to test_ is one checkbox: an action a tester takes, and the outcome they should see. Quote the UI's own copy (labels, toasts, error messages) exactly as the code renders it, in the product's language. Group checks by area under `###` headings, such as the feature's main flow, validation, destructive actions, side effects on other screens, and permissions.
 
 Go after the cases the diff makes possible: empty states, error states and their messages, double-submits and slow networks, stale data across tabs, and every role the change guards. Write a check that can't be run from the UI (a direct API call, a second account) with the way to run it, for example "via DevTools or curl".
 
