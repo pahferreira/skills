@@ -7,6 +7,7 @@
   },
   "skills": [
     "./skills/engineering/pr",
-    "./skills/engineering/bug-hunt"
+    "./skills/engineering/bug-hunt",
+    "./skills/engineering/qa-plan"
   ]
 }
