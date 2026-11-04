@@ -1,5 +1,13 @@
 # pahferreira-skills
 
+## 1.2.0
+
+### Minor Changes
+
+- [#8](https://github.com/pahferreira/skills/pull/8) [`73786f1`](https://github.com/pahferreira/skills/commit/73786f1cc86ffc1a8b2c3e74ced46048b572f7a4) Thanks [@pahferreira](https://github.com/pahferreira)! - add qa-plan engineering skill
+
+- [#7](https://github.com/pahferreira/skills/pull/7) [`5f7d18b`](https://github.com/pahferreira/skills/commit/5f7d18b260a336c5cef40949e91cc4e1e3b10901) Thanks [@pahferreira](https://github.com/pahferreira)! - add bug-hunt engineering skill
+
 ## 1.1.0
 
 ### Minor Changes
