@@ -2,6 +2,12 @@
   "name": "pahferreira-skills",
   "version": "1.2.0",
   "description": "Pah Ferreira Engineering skills",
+  "keywords": [
+    "pi-package",
+    "claude-code-plugin",
+    "agent-skills",
+    "skills"
+  ],
   "homepage": "https://github.com/pahferreira/skills#readme",
   "bugs": {
     "url": "https://github.com/pahferreira/skills/issues"
@@ -15,8 +21,14 @@
   "files": [
     ".claude-plugin",
     "skills",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "README.md"
   ],
+  "pi": {
+    "skills": [
+      "./skills"
+    ]
+  },
   "scripts": {
     "changeset": "changeset",
     "version-packages": "changeset version && node scripts/sync-plugin-version.mjs"
